@@ -52,7 +52,6 @@ public class PersonService {
 
     public UUID delete(String name) {
         List<Person> personList = personRepository.findByName(name);
-        System.out.println("$$$$$$$$" + name +"$$$$$$" + personList.size());
         personRepository.deletePersonById(personList.get(0).getId());
         LOGGER.debug("Person with id {} was deleted from the db", personList.get(0).getId());
         return personList.get(0).getId();

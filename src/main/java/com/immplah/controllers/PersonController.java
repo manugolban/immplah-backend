@@ -35,6 +35,7 @@ public class PersonController {
         for (PersonDTO dto : dtos) {
             Link personLink = linkTo(methodOn(PersonController.class)
                     .getPerson(dto.getId())).withRel("personDetails");
+
             dto.add(personLink);
         }
         return new ResponseEntity<>(dtos, HttpStatus.OK);
@@ -45,6 +46,8 @@ public class PersonController {
         UUID personID = personService.insert(personDTO);
         return new ResponseEntity<>(personID, HttpStatus.CREATED);
     }
+
+
 
     @DeleteMapping(value = "/{name}")
     public ResponseEntity<UUID> deleteProsumer(@PathVariable("name") String name) {
