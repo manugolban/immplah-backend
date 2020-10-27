@@ -17,7 +17,7 @@ public class Drug implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Type(type = "uuid-binary")
+    @Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID id;
 
     @Column(name = "name", nullable = false)
@@ -26,7 +26,7 @@ public class Drug implements Serializable {
     @Column(name = "concentrations", nullable = false)
     private String concentrations;
 
-    @ManyToMany(mappedBy = "drugs")
+    @ManyToMany(mappedBy = "drugs",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<SideEffect> sideEffects;
 
 
@@ -41,6 +41,12 @@ public class Drug implements Serializable {
         this.concentrations = concentrations;
         this.sideEffects = sideEffects;
         this.prescribedDrugs = prescribedDrugs;
+    }
+
+    public Drug(UUID id, String name, String concentrations) {
+        this.id = id;
+        this.name = name;
+        this.concentrations = concentrations;
     }
 
     public UUID getId() {

@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Service
 public class DoctorService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PersonService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DoctorService.class);
     private final DoctorRepository doctorRepository;
     private final AppUserRepository appUserRepository;
 

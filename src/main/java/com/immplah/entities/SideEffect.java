@@ -17,7 +17,7 @@ public class SideEffect implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Type(type = "uuid-binary")
+    @Type(type="org.hibernate.type.PostgresUUIDType")
     private UUID id;
 
     private String name;
@@ -32,11 +32,15 @@ public class SideEffect implements Serializable {
 
     }
 
+    public SideEffect(UUID id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public SideEffect(String name, List<Drug> drugs) {
         this.name = name;
         this.drugs = drugs;
     }
-
 
     public UUID getId() {
         return id;

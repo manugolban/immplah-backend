@@ -2,11 +2,10 @@ package com.immplah.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -22,14 +21,10 @@ public class MedicationPlan implements Serializable {
     private UUID id;
 
     @Column(name = "period_from", nullable = false)
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date periodFrom;
+    private String periodFrom;
 
     @Column(name = "period_to", nullable = false)
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date periodTo;
+    private String periodTo;
 
     @ManyToOne
     @JoinColumn(name="doctor_id")
@@ -45,6 +40,13 @@ public class MedicationPlan implements Serializable {
     public MedicationPlan() {
     }
 
+    public MedicationPlan(UUID id, String periodFrom, String periodTo, Doctor doctor, Patient patient) {
+        this.id = id;
+        this.periodFrom = periodFrom;
+        this.periodTo = periodTo;
+        this.doctor = doctor;
+        this.patient = patient;
+    }
 
     public UUID getId() {
         return id;
@@ -54,19 +56,19 @@ public class MedicationPlan implements Serializable {
         this.id = id;
     }
 
-    public Date getPeriodFrom() {
+    public String getPeriodFrom() {
         return periodFrom;
     }
 
-    public void setPeriodFrom(Date periodFrom) {
+    public void setPeriodFrom(String periodFrom) {
         this.periodFrom = periodFrom;
     }
 
-    public Date getPeriodTo() {
+    public String getPeriodTo() {
         return periodTo;
     }
 
-    public void setPeriodTo(Date periodTo) {
+    public void setPeriodTo(String periodTo) {
         this.periodTo = periodTo;
     }
 

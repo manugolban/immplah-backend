@@ -41,9 +41,9 @@ public class PrescribedDrug implements Serializable {
     public PrescribedDrug() {
     }
 
-    public PrescribedDrug(Drug drug, MedicationPlan medicationPlan, boolean morning, boolean midDay, boolean evening, boolean bedTime, String dosage) {
+    public PrescribedDrug(UUID id, Drug drug, boolean morning, boolean midDay, boolean evening, boolean bedTime, String dosage) {
+        this.id = id;
         this.drug = drug;
-        this.medicationPlan = medicationPlan;
         this.morning = morning;
         this.midDay = midDay;
         this.evening = evening;

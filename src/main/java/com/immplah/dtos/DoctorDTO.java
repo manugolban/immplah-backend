@@ -3,6 +3,7 @@ package com.immplah.dtos;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -10,7 +11,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
-public class DoctorDTO {
+public class DoctorDTO extends RepresentationModel<DoctorDTO> {
 
 
     private UUID id;
@@ -19,6 +20,7 @@ public class DoctorDTO {
 
     private String gender;
     private String address;
+    private String DOB;
     private String email;
     private String phone;
     private String specialty;
@@ -28,12 +30,13 @@ public class DoctorDTO {
     public DoctorDTO() {
     }
 
-    public DoctorDTO(UUID id, String firstName, String lastName, String gender, String address, String email, String phone, String specialty, AppUserDTO user) {
+    public DoctorDTO(UUID id, String firstName, String lastName, String gender, String address, String DOB, String email, String phone, String specialty, AppUserDTO user) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.address = address;
+        this.DOB = DOB;
         this.email = email;
         this.phone = phone;
         this.specialty = specialty;
@@ -62,6 +65,14 @@ public class DoctorDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getDOB() {
+        return DOB;
+    }
+
+    public void setDOB(String DOB) {
+        this.DOB = DOB;
     }
 
     public String getGender() {

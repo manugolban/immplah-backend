@@ -2,11 +2,11 @@ package com.immplah.entities;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -28,9 +28,7 @@ public class Patient implements Serializable {
     private String lastName;
 
     @Column(name = "dob", nullable = false)
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date DOB;
+    private String DOB;
 
     @Column(name = "gender", nullable = false)
     private String gender;
@@ -62,10 +60,11 @@ public class Patient implements Serializable {
     public Patient() {
     }
 
-    public Patient(UUID id, String firstName, String lastName, String gender, String address, String email, String phone, String medicalRecord) {
+    public Patient(UUID id, String firstName, String lastName, String DOB, String gender, String address, String email, String phone, String medicalRecord) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.DOB = DOB;
         this.gender = gender;
         this.address = address;
         this.email = email;
@@ -97,11 +96,11 @@ public class Patient implements Serializable {
         this.lastName = lastName;
     }
 
-    public Date getDOB() {
+    public String getDOB() {
         return DOB;
     }
 
-    public void setDOB(Date DOB) {
+    public void setDOB(String DOB) {
         this.DOB = DOB;
     }
 
