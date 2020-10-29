@@ -17,15 +17,15 @@ public class SideEffect implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Type(type="org.hibernate.type.PostgresUUIDType")
+    @Type(type = "uuid-binary")
     private UUID id;
 
     private String name;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "drug_side_effect",
-    joinColumns = @JoinColumn(name="side_effect_id"),
-    inverseJoinColumns = @JoinColumn(name="drug_id"))
+            joinColumns = @JoinColumn(name="side_effect_id"),
+        inverseJoinColumns = @JoinColumn(name="drug_id"))
     private List<Drug> drugs;
 
     public SideEffect() {

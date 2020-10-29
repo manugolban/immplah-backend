@@ -13,8 +13,4 @@ import java.util.UUID;
 public interface DrugRepository extends JpaRepository<Drug, UUID> {
 
 
-    @Query(value = "insert into drug_side_effect (side_effect_id, drug_id) VALUES (:sei, :di)", nativeQuery = true)
-    void  addDrugSideEffect(@Param("sei") UUID sei, @Param("di") UUID di);
-
-
 }
