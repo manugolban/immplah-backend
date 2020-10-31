@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class CaregiverDTO extends RepresentationModel<CaregiverDTO> {
+public class CaregiverDTO  {
 
     private UUID id;
 
@@ -39,6 +39,17 @@ public class CaregiverDTO extends RepresentationModel<CaregiverDTO> {
         this.phone = phone;
         this.user = user;
         this.patientList = patientList;
+    }
+
+    public CaregiverDTO(UUID id, String firstName, String lastName, String DOB, String gender, String address, String email, String phone) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.DOB = DOB;
+        this.gender = gender;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
     }
 
     public UUID getId() {

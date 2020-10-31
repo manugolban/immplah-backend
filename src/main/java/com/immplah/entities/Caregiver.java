@@ -1,9 +1,10 @@
 package com.immplah.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
@@ -46,7 +47,8 @@ public class Caregiver implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private AppUser user;
 
-    @OneToMany(mappedBy = "caregiver")
+    @OneToMany(mappedBy = "caregiver", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Patient> patientList;
 
     public Caregiver() {

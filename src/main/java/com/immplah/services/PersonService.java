@@ -50,6 +50,7 @@ public class PersonService {
         return person.getId();
     }
 
+
     public UUID delete(String name) {
         List<Person> personList = personRepository.findByName(name);
         personRepository.deletePersonById(personList.get(0).getId());

@@ -55,7 +55,4 @@ public class AppUserService {
         return appUser.getId();
     }
 
-
-
-
 }

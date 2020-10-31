@@ -17,6 +17,7 @@ public class PrescribedDrugBuilder {
                 prescribedDrug.isMidDay(),
                 prescribedDrug.isEvening(),
                 prescribedDrug.isBedTime(),
+                prescribedDrug.getDays(),
                 prescribedDrug.getDosage()
         );
 
@@ -29,7 +30,8 @@ public class PrescribedDrugBuilder {
                 prescribedDrugDTO.isMorning(),
                 prescribedDrugDTO.isMidDay(),
                 prescribedDrugDTO.isEvening(),
-                prescribedDrugDTO.isEvening(),
+                prescribedDrugDTO.isBedTime(),
+                prescribedDrugDTO.getDays(),
                 prescribedDrugDTO.getDosage()
         );
     }

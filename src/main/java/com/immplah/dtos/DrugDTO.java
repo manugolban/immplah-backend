@@ -1,34 +1,25 @@
 package com.immplah.dtos;
 
 
-import org.springframework.hateoas.RepresentationModel;
-
-
-import java.util.List;
 import java.util.UUID;
 
-public class DrugDTO extends RepresentationModel<DrugDTO> {
+public class DrugDTO {
 
     private UUID id;
     private String name;
     private String concentrations;
-    private List<SideEffectDTO> sideEffects;
+    private String sideEffects;
 
     public DrugDTO() {
     }
 
-    public DrugDTO(UUID id, String name, String concentrations, List<SideEffectDTO> sideEffects) {
+    public DrugDTO(UUID id, String name, String concentrations, String sideEffects) {
         this.id = id;
         this.name = name;
         this.concentrations = concentrations;
         this.sideEffects = sideEffects;
     }
 
-    public DrugDTO(UUID id, String name, String concentrations) {
-        this.id = id;
-        this.name = name;
-        this.concentrations = concentrations;
-    }
 
     public UUID getId() {
         return id;
@@ -54,11 +45,11 @@ public class DrugDTO extends RepresentationModel<DrugDTO> {
         this.concentrations = concentrations;
     }
 
-    public List<SideEffectDTO> getSideEffects() {
+    public String getSideEffects() {
         return sideEffects;
     }
 
-    public void setSideEffects(List<SideEffectDTO> sideEffects) {
+    public void setSideEffects(String sideEffects) {
         this.sideEffects = sideEffects;
     }
 }

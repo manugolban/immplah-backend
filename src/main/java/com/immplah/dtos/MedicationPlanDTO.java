@@ -11,10 +11,16 @@ public class MedicationPlanDTO {
     private String periodFrom;
     private String periodTo;
 
+    private UUID doctorId;
+    private UUID patientId;
+
     private DoctorDTO doctor;
     private PatientDTO patient;
 
     private List<PrescribedDrugDTO> prescribedDrugs;
+
+    public MedicationPlanDTO() {
+    }
 
     public MedicationPlanDTO(UUID id, String periodFrom, String periodTo, DoctorDTO doctor, PatientDTO patient, List<PrescribedDrugDTO> prescribedDrugs) {
         this.id = id;
@@ -22,6 +28,15 @@ public class MedicationPlanDTO {
         this.periodTo = periodTo;
         this.doctor = doctor;
         this.patient = patient;
+        this.prescribedDrugs = prescribedDrugs;
+    }
+
+    public MedicationPlanDTO(UUID id, String periodFrom, String periodTo, UUID doctorId, UUID patientId, List<PrescribedDrugDTO> prescribedDrugs) {
+        this.id = id;
+        this.periodFrom = periodFrom;
+        this.periodTo = periodTo;
+        this.doctorId = doctorId;
+        this.patientId = patientId;
         this.prescribedDrugs = prescribedDrugs;
     }
 
@@ -71,5 +86,21 @@ public class MedicationPlanDTO {
 
     public void setPrescribedDrugs(List<PrescribedDrugDTO> prescribedDrugs) {
         this.prescribedDrugs = prescribedDrugs;
+    }
+
+    public UUID getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(UUID doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public UUID getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(UUID patientId) {
+        this.patientId = patientId;
     }
 }

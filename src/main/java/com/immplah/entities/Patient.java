@@ -28,7 +28,7 @@ public class Patient implements Serializable {
     private String lastName;
 
     @Column(name = "dob", nullable = false)
-    private String DOB;
+    private String dob;
 
     @Column(name = "gender", nullable = false)
     private String gender;
@@ -54,22 +54,38 @@ public class Patient implements Serializable {
     @JoinColumn(name="caregiver_id", referencedColumnName = "id")
     private Caregiver caregiver;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     private List<MedicationPlan> medicationPlans;
 
     public Patient() {
     }
 
+
     public Patient(UUID id, String firstName, String lastName, String DOB, String gender, String address, String email, String phone, String medicalRecord) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.DOB = DOB;
+        this.dob = DOB;
         this.gender = gender;
         this.address = address;
         this.email = email;
         this.phone = phone;
         this.medicalRecord = medicalRecord;
+    }
+
+    public Patient(UUID id, String firstName, String lastName, String dob, String gender, String address, String email, String phone, String medicalRecord, AppUser user, Caregiver caregiver, List<MedicationPlan> medicationPlans) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dob = dob;
+        this.gender = gender;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.medicalRecord = medicalRecord;
+        this.user = user;
+        this.caregiver = caregiver;
+        this.medicationPlans = medicationPlans;
     }
 
     public UUID getId() {
@@ -96,12 +112,12 @@ public class Patient implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getDOB() {
-        return DOB;
+    public String getDob() {
+        return dob;
     }
 
-    public void setDOB(String DOB) {
-        this.DOB = DOB;
+    public void setDob(String DOB) {
+        this.dob = DOB;
     }
 
     public String getGender() {

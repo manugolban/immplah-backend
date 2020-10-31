@@ -7,7 +7,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 import java.util.UUID;
 
-public class PrescribedDrugDTO extends RepresentationModel<PrescribedDrugDTO> {
+public class PrescribedDrugDTO  {
 
     private UUID id;
     private DrugDTO drug;
@@ -17,19 +17,22 @@ public class PrescribedDrugDTO extends RepresentationModel<PrescribedDrugDTO> {
     private boolean evening;
     private boolean bedTime;
 
+    private String days;
+
     private String dosage;
 
 
     public PrescribedDrugDTO() {
     }
 
-    public PrescribedDrugDTO(UUID id, DrugDTO drug, boolean morning, boolean midDay, boolean evening, boolean bedTime, String dosage) {
+    public PrescribedDrugDTO(UUID id, DrugDTO drug, boolean morning, boolean midDay, boolean evening, boolean bedTime, String days, String dosage) {
         this.id = id;
         this.drug = drug;
         this.morning = morning;
         this.midDay = midDay;
         this.evening = evening;
         this.bedTime = bedTime;
+        this.days = days;
         this.dosage = dosage;
     }
 
@@ -89,5 +92,11 @@ public class PrescribedDrugDTO extends RepresentationModel<PrescribedDrugDTO> {
         this.dosage = dosage;
     }
 
+    public String getDays() {
+        return days;
+    }
 
+    public void setDays(String days) {
+        this.days = days;
+    }
 }

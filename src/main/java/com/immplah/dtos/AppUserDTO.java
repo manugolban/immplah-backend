@@ -5,7 +5,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 import java.util.UUID;
 
-public class AppUserDTO extends RepresentationModel<AppUserDTO> {
+public class AppUserDTO  {
 
     private UUID id;
 
@@ -23,6 +23,11 @@ public class AppUserDTO extends RepresentationModel<AppUserDTO> {
         this.username = username;
         this.password = password;
         this.userType = userType;
+    }
+
+    public AppUserDTO(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public UUID getId() {

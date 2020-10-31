@@ -1,26 +1,18 @@
 package com.immplah.dtos;
 
-import com.immplah.entities.AppUser;
-import com.immplah.entities.Caregiver;
-import com.immplah.entities.MedicationPlan;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 import org.springframework.hateoas.RepresentationModel;
 
-
-import javax.persistence.*;
 
 import java.util.List;
 import java.util.UUID;
 
-public class PatientDTO extends RepresentationModel<PatientDTO> {
+public class PatientDTO  {
 
     private UUID id;
 
     private String firstName;
     private String lastName;
-    private String DOB;
-
+    private String dob;
     private String gender;
     private String address;
     private String email;
@@ -29,28 +21,29 @@ public class PatientDTO extends RepresentationModel<PatientDTO> {
     private String medicalRecord;
 
 
+    //private UUID userId;
     private AppUserDTO user;
 
-    private CaregiverDTO caregiver;
+    private UUID caregiverId;
+    //private CaregiverDTO caregiver;
 
-    private List<MedicationPlanDTO> medicationPlans;
+    private List<MedicationPlanDTO> medicationPlan;
 
     public PatientDTO() {
     }
 
-    public PatientDTO(UUID id, String firstName, String lastName, String DOB, String gender, String address, String email, String phone, String medicalRecord, AppUserDTO user, CaregiverDTO caregiver, List<MedicationPlanDTO> medicationPlans) {
+    public PatientDTO(UUID id, String firstName, String lastName, String dob, String gender, String address, String email, String phone, String medicalRecord, AppUserDTO user, UUID caregiverId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.DOB = DOB;
+        this.dob = dob;
         this.gender = gender;
         this.address = address;
         this.email = email;
         this.phone = phone;
         this.medicalRecord = medicalRecord;
         this.user = user;
-        this.caregiver = caregiver;
-        this.medicationPlans = medicationPlans;
+        this.caregiverId = caregiverId;
     }
 
     public UUID getId() {
@@ -77,12 +70,12 @@ public class PatientDTO extends RepresentationModel<PatientDTO> {
         this.lastName = lastName;
     }
 
-    public String getDOB() {
-        return DOB;
+    public String getDob() {
+        return dob;
     }
 
-    public void setDOB(String DOB) {
-        this.DOB = DOB;
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 
     public String getGender() {
@@ -125,27 +118,19 @@ public class PatientDTO extends RepresentationModel<PatientDTO> {
         this.medicalRecord = medicalRecord;
     }
 
+    public UUID getCaregiverId() {
+        return caregiverId;
+    }
+
+    public void setCaregiverId(UUID caregiverId) {
+        this.caregiverId = caregiverId;
+    }
+
     public AppUserDTO getUser() {
         return user;
     }
 
     public void setUser(AppUserDTO user) {
         this.user = user;
-    }
-
-    public CaregiverDTO getCaregiver() {
-        return caregiver;
-    }
-
-    public void setCaregiver(CaregiverDTO caregiver) {
-        this.caregiver = caregiver;
-    }
-
-    public List<MedicationPlanDTO> getMedicationPlans() {
-        return medicationPlans;
-    }
-
-    public void setMedicationPlans(List<MedicationPlanDTO> medicationPlans) {
-        this.medicationPlans = medicationPlans;
     }
 }

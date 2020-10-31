@@ -18,12 +18,12 @@ import java.util.UUID;
 public class DoctorController {
 
     private final DoctorService doctorService;
-    private final AppUserService appUserService;
+
 
     @Autowired
-    public DoctorController(DoctorService doctorService, AppUserService appUserService) {
+    public DoctorController(DoctorService doctorService) {
         this.doctorService = doctorService;
-        this.appUserService = appUserService;
+
     }
 
     @GetMapping()
@@ -41,6 +41,12 @@ public class DoctorController {
     @PostMapping()
     public ResponseEntity<UUID> insertProsumer(@Valid @RequestBody DoctorDTO doctorDTO) {
         UUID doctorId = doctorService.insert(doctorDTO);
+        return new ResponseEntity<>(doctorId, HttpStatus.CREATED);
+    }
+
+    @PutMapping()
+    public ResponseEntity<UUID> updateProsumer(@Valid @RequestBody DoctorDTO doctorDTO) {
+        UUID doctorId = doctorService.update(doctorDTO);
         return new ResponseEntity<>(doctorId, HttpStatus.CREATED);
     }
 }

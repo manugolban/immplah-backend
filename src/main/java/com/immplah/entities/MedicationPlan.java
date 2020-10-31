@@ -34,7 +34,7 @@ public class MedicationPlan implements Serializable {
     @JoinColumn(name="patient_id")
     private Patient patient;
 
-    @OneToMany(mappedBy = "medicationPlan")
+    @OneToMany(mappedBy = "medicationPlan", fetch = FetchType.EAGER)
     private List<PrescribedDrug> prescribedDrugs;
 
     public MedicationPlan() {
@@ -46,6 +46,12 @@ public class MedicationPlan implements Serializable {
         this.periodTo = periodTo;
         this.doctor = doctor;
         this.patient = patient;
+    }
+
+    public MedicationPlan(UUID id, String periodFrom, String periodTo) {
+        this.id = id;
+        this.periodFrom = periodFrom;
+        this.periodTo = periodTo;
     }
 
     public UUID getId() {

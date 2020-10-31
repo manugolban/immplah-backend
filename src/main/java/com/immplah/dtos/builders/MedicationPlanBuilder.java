@@ -31,9 +31,7 @@ public class MedicationPlanBuilder {
 
         return new MedicationPlan(medicationPlanDTO.getId(),
                 medicationPlanDTO.getPeriodFrom(),
-                medicationPlanDTO.getPeriodTo(),
-                DoctorBuilder.toEntity(medicationPlanDTO.getDoctor()),
-                PatientBuilder.toEntity(medicationPlanDTO.getPatient())
+                medicationPlanDTO.getPeriodTo()
                 );
     }
 }

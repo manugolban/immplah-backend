@@ -26,11 +26,8 @@ public class Drug implements Serializable {
     @Column(name = "concentrations", nullable = false)
     private String concentrations;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "drug_side_effect",
-            inverseJoinColumns = @JoinColumn(name="side_effect_id"),
-            joinColumns = @JoinColumn(name="drug_id"))
-    private List<SideEffect> sideEffects;
+    @Column(name = "side_effects", nullable = false)
+    private String sideEffects;
 
 
     @OneToMany(mappedBy = "drug")
@@ -39,17 +36,18 @@ public class Drug implements Serializable {
     public Drug() {
     }
 
-    public Drug(String name, String concentrations, List<SideEffect> sideEffects, List<PrescribedDrug> prescribedDrugs) {
+    public Drug(String name, String concentrations, String sideEffects, List<PrescribedDrug> prescribedDrugs) {
         this.name = name;
         this.concentrations = concentrations;
         this.sideEffects = sideEffects;
         this.prescribedDrugs = prescribedDrugs;
     }
 
-    public Drug(UUID id, String name, String concentrations) {
+    public Drug(UUID id, String name, String concentrations, String sideEffects) {
         this.id = id;
         this.name = name;
         this.concentrations = concentrations;
+        this.sideEffects = sideEffects;
     }
 
     public UUID getId() {
@@ -68,11 +66,11 @@ public class Drug implements Serializable {
         this.name = name;
     }
 
-    public List<SideEffect> getSideEffects() {
+    public String getSideEffects() {
         return sideEffects;
     }
 
-    public void setSideEffects(List<SideEffect> sideEffects) {
+    public void setSideEffects(String sideEffects) {
         this.sideEffects = sideEffects;
     }
 

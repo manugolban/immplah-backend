@@ -45,7 +45,7 @@ public class DoctorService {
     public DoctorDTO findDoctorById(UUID id){
         Optional<Doctor> prosumerOptional = doctorRepository.findById(id);
         if(!prosumerOptional.isPresent()){
-            LOGGER.error("Doctor  with id {} was not found in db", id);
+            LOGGER.error("Doctor with id {} was not found in db!", id);
             throw new ResourceNotFoundException(Doctor.class.getSimpleName() + " with id: " + id);
         }
         return DoctorBuilder.toDoctorDTO(prosumerOptional.get());
@@ -59,7 +59,19 @@ public class DoctorService {
         doctor.setUser(appUser);
 
         doctor = doctorRepository.save(doctor);
-        LOGGER.debug("Doctor with id {} was inserted in db", doctor.getId());
+        LOGGER.debug("Doctor with id {} was inserted in db!", doctor.getId());
+        return doctor.getId();
+    }
+
+    public UUID update(DoctorDTO doctorDTO){
+        AppUser appUser = AppUserBuilder.toEntity(doctorDTO.getUser());
+        appUser = appUserRepository.save(appUser);
+
+        Doctor doctor = DoctorBuilder.toEntity(doctorDTO);
+        doctor.setUser(appUser);
+
+        doctor = doctorRepository.save(doctor);
+        LOGGER.debug("Doctor with id {} has been updated!", doctor.getId());
         return doctor.getId();
     }
 }

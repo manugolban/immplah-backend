@@ -22,7 +22,7 @@ public class PrescribedDrug implements Serializable {
     @JoinColumn(name="drug_id", nullable = false)
     private Drug drug;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="medication_plan_id", nullable = false)
     private MedicationPlan medicationPlan;
 
@@ -35,19 +35,23 @@ public class PrescribedDrug implements Serializable {
     @Column(name="bed_time", nullable = false)
     private boolean bedTime;
 
+    @Column(name="days", nullable = false)
+    private String days;
+
     @Column(name="dosage", nullable = false)
     private String dosage;
 
     public PrescribedDrug() {
     }
 
-    public PrescribedDrug(UUID id, Drug drug, boolean morning, boolean midDay, boolean evening, boolean bedTime, String dosage) {
+    public PrescribedDrug(UUID id, Drug drug, boolean morning, boolean midDay, boolean evening, boolean bedTime, String days, String dosage) {
         this.id = id;
         this.drug = drug;
         this.morning = morning;
         this.midDay = midDay;
         this.evening = evening;
         this.bedTime = bedTime;
+        this.days = days;
         this.dosage = dosage;
     }
 
@@ -113,5 +117,13 @@ public class PrescribedDrug implements Serializable {
 
     public void setDosage(String dosage) {
         this.dosage = dosage;
+    }
+
+    public String getDays() {
+        return days;
+    }
+
+    public void setDays(String days) {
+        this.days = days;
     }
 }
