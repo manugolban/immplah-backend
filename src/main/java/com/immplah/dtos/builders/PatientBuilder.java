@@ -15,8 +15,6 @@ public class PatientBuilder {
     }
 
     public static PatientDTO toPatientDTO(Patient patient) {
-
-
         return new PatientDTO(patient.getId(),
                 patient.getFirstName(),
                 patient.getLastName(),

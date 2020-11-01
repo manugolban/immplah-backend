@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -50,12 +51,13 @@ public class MedicationPlanService {
 
         Optional<MedicationPlan> prosumerOptional = medicationPlanRepository.findById(id);
         if(!prosumerOptional.isPresent()){
-            LOGGER.error("Medical Plan  with id {} was not found in db", id);
+            LOGGER.error("Medication Plan  with id {} was not found in db", id);
             throw new ResourceNotFoundException(MedicationPlan.class.getSimpleName() + " with id: " + id);
         }
         return MedicationPlanBuilder.toMedicationPlanDTO(prosumerOptional.get());
 
     }
+
 
     public UUID insert(MedicationPlanDTO medicationPlanDTO) {
         MedicationPlan medicationPlan = MedicationPlanBuilder.toEntity(medicationPlanDTO);
@@ -74,7 +76,7 @@ public class MedicationPlanService {
             p = prescribedDrugRepository.save(p);
         }
 
-        LOGGER.debug("Medical Plan with id {} was inserted in db", medicationPlan.getId());
+        LOGGER.debug("Medication Plan with id {} was inserted in db", medicationPlan.getId());
         return medicationPlan.getId();
     }
 }

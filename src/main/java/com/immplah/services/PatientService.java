@@ -1,12 +1,11 @@
 package com.immplah.services;
 
 import com.immplah.controllers.handlers.exceptions.model.ResourceNotFoundException;
+import com.immplah.dtos.MedicationPlanDTO;
 import com.immplah.dtos.PatientDTO;
-import com.immplah.dtos.builders.AppUserBuilder;
-import com.immplah.dtos.builders.CaregiverBuilder;
-import com.immplah.dtos.builders.PatientBuilder;
-import com.immplah.dtos.builders.PersonBuilder;
+import com.immplah.dtos.builders.*;
 import com.immplah.entities.AppUser;
+import com.immplah.entities.MedicationPlan;
 import com.immplah.entities.Patient;
 import com.immplah.entities.Person;
 import com.immplah.repositories.AppUserRepository;
@@ -19,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -56,6 +56,19 @@ public class PatientService {
         return PatientBuilder.toPatientDTO(prosumerOptional.get());
 
     }
+
+    public List<MedicationPlanDTO> findMedicationPlansByPatientId(UUID id) {
+        Optional<Patient> prosumerOptional = patientRepository.findById(id);
+        if(!prosumerOptional.isPresent()){
+            LOGGER.error("Patient with id {} was not found in db", id);
+            throw new ResourceNotFoundException(Patient.class.getSimpleName() + " with id: " + id);
+        } else {
+            return prosumerOptional.get().getMedicationPlans().stream()
+                    .map(MedicationPlanBuilder::toMedicationPlanDTO)
+                    .collect(Collectors.toList());
+        }
+    }
+
 
     public UUID insert(PatientDTO patientDTO) {
         Patient patient = PatientBuilder.toEntity(patientDTO);

@@ -1,6 +1,8 @@
 package com.immplah.entities;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 
 
@@ -47,14 +49,15 @@ public class Patient implements Serializable {
 
     // FK's and entities
     @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = true)
     private AppUser user;
 
     @ManyToOne
     @JoinColumn(name="caregiver_id", referencedColumnName = "id")
     private Caregiver caregiver;
 
-    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "patient")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<MedicationPlan> medicationPlans;
 
     public Patient() {

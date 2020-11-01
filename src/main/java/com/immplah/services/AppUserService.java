@@ -55,4 +55,10 @@ public class AppUserService {
         return appUser.getId();
     }
 
+    public UUID delete(UUID id) {
+        appUserRepository.deleteAppUserById(id);
+        LOGGER.debug("User with id{} has been deleted!", id);
+        return id;
+    }
+
 }

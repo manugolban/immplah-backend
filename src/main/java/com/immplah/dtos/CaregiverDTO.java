@@ -16,7 +16,7 @@ public class CaregiverDTO  {
 
     private String firstName;
     private String lastName;
-    private String DOB;
+    private String dob;
     private String gender;
     private String address;
     private String email;
@@ -32,7 +32,7 @@ public class CaregiverDTO  {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.DOB = DOB;
+        this.dob = DOB;
         this.gender = gender;
         this.address = address;
         this.email = email;
@@ -45,7 +45,7 @@ public class CaregiverDTO  {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.DOB = DOB;
+        this.dob = DOB;
         this.gender = gender;
         this.address = address;
         this.email = email;
@@ -77,11 +77,11 @@ public class CaregiverDTO  {
     }
 
     public String getDOB() {
-        return DOB;
+        return dob;
     }
 
     public void setDOB(String DOB) {
-        this.DOB = DOB;
+        this.dob = DOB;
     }
 
     public String getGender() {

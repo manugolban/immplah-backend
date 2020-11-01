@@ -1,10 +1,11 @@
 package com.immplah.entities;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import java.io.Serializable;
 
 import java.util.List;
@@ -47,11 +48,12 @@ public class Doctor implements Serializable {
 
     //FK's and entities
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
     private AppUser user;
 
     @OneToMany(mappedBy = "doctor")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<MedicationPlan> medicationPlans;
 
     public Doctor() {

@@ -22,7 +22,7 @@ public class CaregiverBuilder {
         AppUserDTO appUserDTO = AppUserBuilder.toAppUserDTO(caregiver.getUser());
         for(Patient p: caregiver.getPatientList()) {
             PatientDTO patientDTO = PatientBuilder.toPatientDTO(p);
-            patientDTO.setUser(new AppUserDTO("UNAVAILABLE", "UNAVAILABLE"));
+            patientDTO.setUser(null);
             dtos.add(patientDTO);
         }
         return new CaregiverDTO(caregiver.getId(),

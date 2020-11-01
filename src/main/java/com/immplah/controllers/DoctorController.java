@@ -1,6 +1,8 @@
 package com.immplah.controllers;
 
 import com.immplah.dtos.DoctorDTO;
+import com.immplah.dtos.MedicationPlanDTO;
+import com.immplah.entities.Doctor;
 import com.immplah.services.AppUserService;
 import com.immplah.services.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,12 @@ public class DoctorController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/plans/{id}")
+    public ResponseEntity<List<MedicationPlanDTO>> getPlansByPatientId(@PathVariable("id") UUID doctorId){
+        List<MedicationPlanDTO> dtos = doctorService.findMedicationPlansByDoctorId(doctorId);
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
+    }
+
     @PostMapping()
     public ResponseEntity<UUID> insertProsumer(@Valid @RequestBody DoctorDTO doctorDTO) {
         UUID doctorId = doctorService.insert(doctorDTO);
@@ -48,5 +56,11 @@ public class DoctorController {
     public ResponseEntity<UUID> updateProsumer(@Valid @RequestBody DoctorDTO doctorDTO) {
         UUID doctorId = doctorService.update(doctorDTO);
         return new ResponseEntity<>(doctorId, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<UUID> deleteDoctor(@PathVariable("id") UUID DoctorId) {
+        UUID doctorId = doctorService.delete(DoctorId);
+        return new ResponseEntity<>(doctorId, HttpStatus.OK);
     }
 }

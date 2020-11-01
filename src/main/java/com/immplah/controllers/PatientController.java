@@ -1,6 +1,8 @@
 package com.immplah.controllers;
 
+import com.immplah.dtos.MedicationPlanDTO;
 import com.immplah.dtos.PatientDTO;
+import com.immplah.entities.MedicationPlan;
 import com.immplah.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +37,11 @@ public class PatientController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/plans/{id}")
+    public ResponseEntity<List<MedicationPlanDTO>> getPlansByPatientId(@PathVariable("id") UUID patientId){
+        List<MedicationPlanDTO> dtos = patientService.findMedicationPlansByPatientId(patientId);
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
+    }
     @PostMapping()
     public ResponseEntity<UUID> insertProsumer(@Valid @RequestBody PatientDTO patientDTO) {
         UUID patientId = patientService.insert(patientDTO);

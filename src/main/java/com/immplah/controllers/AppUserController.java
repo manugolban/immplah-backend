@@ -43,4 +43,10 @@ public class AppUserController {
         UUID appUserId = appUserService.insert(appUserDTO);
         return new ResponseEntity<>(appUserId, HttpStatus.CREATED);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<UUID> deleteUser(@PathVariable("id") UUID appUserId) {
+        appUserId = appUserService.delete(appUserId);
+        return new ResponseEntity<>(appUserId, HttpStatus.OK);
+    }
 }

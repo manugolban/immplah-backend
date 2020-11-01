@@ -20,7 +20,7 @@ public class DoctorDTO  {
 
     private String gender;
     private String address;
-    private String DOB;
+    private String dob;
     private String email;
     private String phone;
     private String specialty;
@@ -36,7 +36,7 @@ public class DoctorDTO  {
         this.lastName = lastName;
         this.gender = gender;
         this.address = address;
-        this.DOB = DOB;
+        this.dob = DOB;
         this.email = email;
         this.phone = phone;
         this.specialty = specialty;
@@ -68,11 +68,11 @@ public class DoctorDTO  {
     }
 
     public String getDOB() {
-        return DOB;
+        return dob;
     }
 
     public void setDOB(String DOB) {
-        this.DOB = DOB;
+        this.dob = DOB;
     }
 
     public String getGender() {
