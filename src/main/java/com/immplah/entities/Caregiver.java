@@ -43,8 +43,8 @@ public class Caregiver implements Serializable {
     private String phone;
 
     //FK's and entities
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = true)
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private AppUser user;
 
     @OneToMany(mappedBy = "caregiver", cascade = CascadeType.ALL)

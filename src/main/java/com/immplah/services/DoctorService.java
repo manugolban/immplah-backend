@@ -89,7 +89,7 @@ public class DoctorService {
         return doctor.getId();
     }
 
-    public UUID delete(UUID id) {
+    public UUID deleteById(UUID id) {
         doctorRepository.deleteDoctorById(id);
         LOGGER.debug("Doctor with id{} has been deleted!", id);
         return id;

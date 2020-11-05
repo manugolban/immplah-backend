@@ -1,6 +1,7 @@
 package com.immplah.controllers;
 
 import com.immplah.dtos.CaregiverDTO;
+import com.immplah.dtos.DoctorDTO;
 import com.immplah.services.CaregiverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,4 +41,17 @@ public class CaregiverController {
         UUID patientId = caregiverService.insert(caregiverDTO);
         return new ResponseEntity<>(patientId, HttpStatus.CREATED);
     }
+
+    @PutMapping()
+    public ResponseEntity<UUID> updateProsumer(@Valid @RequestBody CaregiverDTO caregiverDTO) {
+        UUID caregiverId = caregiverService.update(caregiverDTO);
+        return new ResponseEntity<>(caregiverId, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<UUID> deleteProsumer(@PathVariable("id") UUID caregiverId) {
+        UUID caregiver = caregiverService.delete(caregiverId);
+        return new ResponseEntity<>(caregiver, HttpStatus.OK);
+    }
+
 }

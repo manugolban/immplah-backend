@@ -33,7 +33,7 @@ public class AppUser implements Serializable {
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user")
     private Doctor doctor;
     @OneToOne(mappedBy = "user")
     private Patient patient;

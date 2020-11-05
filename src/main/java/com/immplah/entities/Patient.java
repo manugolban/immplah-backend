@@ -48,8 +48,8 @@ public class Patient implements Serializable {
     private String medicalRecord;
 
     // FK's and entities
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "user_id", nullable = true)
+    @OneToOne(cascade=CascadeType.REMOVE)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private AppUser user;
 
     @ManyToOne

@@ -7,6 +7,7 @@ import com.immplah.entities.Patient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class PatientBuilder {
@@ -15,6 +16,7 @@ public class PatientBuilder {
     }
 
     public static PatientDTO toPatientDTO(Patient patient) {
+        UUID caregiverId = patient.getCaregiver() == null ? null : patient.getCaregiver().getId();
         return new PatientDTO(patient.getId(),
                 patient.getFirstName(),
                 patient.getLastName(),
@@ -25,7 +27,7 @@ public class PatientBuilder {
                 patient.getPhone(),
                 patient.getMedicalRecord(),
                 AppUserBuilder.toAppUserDTO(patient.getUser()),
-                patient.getCaregiver().getId()
+                caregiverId
         );
     }
 

@@ -60,7 +60,7 @@ public class DoctorController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<UUID> deleteDoctor(@PathVariable("id") UUID DoctorId) {
-        UUID doctorId = doctorService.delete(DoctorId);
+        UUID doctorId = doctorService.deleteById(DoctorId);
         return new ResponseEntity<>(doctorId, HttpStatus.OK);
     }
 }

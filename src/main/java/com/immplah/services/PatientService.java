@@ -30,11 +30,13 @@ public class PatientService {
     private static final Logger LOGGER = LoggerFactory.getLogger(PersonService.class);
     private final PatientRepository patientRepository;
     private final CaregiverRepository caregiverRepository;
+    private final AppUserRepository appUserRepository;
 
     @Autowired
-    public PatientService(PatientRepository patientRepository, CaregiverRepository caregiverRepository) {
+    public PatientService(PatientRepository patientRepository, CaregiverRepository caregiverRepository, AppUserRepository appUserRepository) {
         this.patientRepository = patientRepository;
         this.caregiverRepository = caregiverRepository;
+        this.appUserRepository = appUserRepository;
     }
 
     public List<PatientDTO> findPatients() {
@@ -72,8 +74,12 @@ public class PatientService {
 
     public UUID insert(PatientDTO patientDTO) {
         Patient patient = PatientBuilder.toEntity(patientDTO);
-        patient.setUser(AppUserBuilder.toEntity(patientDTO.getUser()));
-        patient.setCaregiver(caregiverRepository.findById(patientDTO.getCaregiverId()).get());
+        AppUser appUser = AppUserBuilder.toEntity(patientDTO.getUser());
+        appUser = appUserRepository.save(appUser);
+        patient.setUser(appUser);
+        if(patientDTO.getCaregiverId() != null) {
+            patient.setCaregiver(caregiverRepository.findById(patientDTO.getCaregiverId()).get());
+        }
         patient = patientRepository.save(patient);
         LOGGER.debug("Patient with id {} was inserted in db", patient.getId());
         return patient.getId();
@@ -90,5 +96,11 @@ public class PatientService {
         patient = patientRepository.save(patient);
         LOGGER.debug("Patient with id {} has been updated", patient.getId());
         return patient.getId();
+    }
+
+    public UUID deleteById(UUID patientId) {
+        patientRepository.deleteById(patientId);
+        LOGGER.debug("Patient with id{} has been deleted!", patientId);
+        return patientId;
     }
 }
