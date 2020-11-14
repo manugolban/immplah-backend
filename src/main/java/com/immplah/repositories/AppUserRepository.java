@@ -20,4 +20,7 @@ public interface AppUserRepository extends JpaRepository<AppUser, UUID> {
     @Modifying
     @Query(value = "DELETE from AppUser a  WHERE a.id = :id")
     void deleteAppUserById(@Param("id") UUID id);
+
+    @Query(value = "SELECT u from AppUser u WHERE u.username = :username AND u.password = :password")
+    Optional<AppUser> findMatchingUser(@Param("username") String username, @Param("password") String password);
 }

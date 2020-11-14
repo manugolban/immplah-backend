@@ -30,7 +30,7 @@ public class Drug implements Serializable {
     private String sideEffects;
 
 
-    @OneToMany(mappedBy = "drug")
+    @OneToMany(mappedBy = "drug", cascade = CascadeType.REMOVE)
     private List<PrescribedDrug> prescribedDrugs;
 
     public Drug() {

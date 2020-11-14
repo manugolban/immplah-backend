@@ -66,7 +66,7 @@ public class PatientService {
             throw new ResourceNotFoundException(Patient.class.getSimpleName() + " with id: " + id);
         } else {
             return prosumerOptional.get().getMedicationPlans().stream()
-                    .map(MedicationPlanBuilder::toMedicationPlanDTO)
+                    .map(MedicationPlanBuilder::toMedicationPlanWithNamesDTO)
                     .collect(Collectors.toList());
         }
     }

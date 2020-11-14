@@ -27,6 +27,19 @@ public class MedicationPlanBuilder {
                 dtos);
     }
 
+    public static MedicationPlanDTO toMedicationPlanWithNamesDTO(MedicationPlan medicationPlan) {
+        List<PrescribedDrugDTO> dtos = new ArrayList<>();
+        for(PrescribedDrug p: medicationPlan.getPrescribedDrugs()) {
+            dtos.add(PrescribedDrugBuilder.toPrescribedDrugDTO(p));
+        }
+        return new MedicationPlanDTO(medicationPlan.getId(),
+                medicationPlan.getPeriodFrom(),
+                medicationPlan.getPeriodTo(),
+                "Dr. " + medicationPlan.getDoctor().getFirstName() + " " + medicationPlan.getDoctor().getLastName(),
+                medicationPlan.getPatient().getFirstName() + " " + medicationPlan.getPatient().getLastName(),
+                dtos);
+    }
+
     public static MedicationPlan toEntity(MedicationPlanDTO medicationPlanDTO) {
 
         return new MedicationPlan(medicationPlanDTO.getId(),

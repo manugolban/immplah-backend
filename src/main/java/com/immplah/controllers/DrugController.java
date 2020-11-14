@@ -35,4 +35,10 @@ public class DrugController {
         UUID drugId = drugService.insert(drugDTO);
         return new ResponseEntity<UUID>(drugId, HttpStatus.CREATED);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<UUID> deleteProsumer(@PathVariable("id") UUID drugId) {
+        UUID drug = drugService.deleteById(drugId);
+        return new ResponseEntity<>(drug, HttpStatus.OK);
+    }
 }

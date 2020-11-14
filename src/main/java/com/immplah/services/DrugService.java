@@ -37,4 +37,10 @@ public class DrugService {
         LOGGER.debug("Drug with id {} has been inserted into the db", drug.getId());
         return drug.getId();
     }
+
+    public UUID deleteById(UUID drugId) {
+        drugRepository.deleteById(drugId);
+        LOGGER.debug("Drug with id{} has been deleted!", drugId);
+        return drugId;
+    }
 }

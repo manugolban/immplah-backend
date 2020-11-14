@@ -56,7 +56,7 @@ public class Patient implements Serializable {
     @JoinColumn(name="caregiver_id", referencedColumnName = "id")
     private Caregiver caregiver;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<MedicationPlan> medicationPlans;
 

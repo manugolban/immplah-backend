@@ -61,4 +61,16 @@ public class AppUserService {
         return id;
     }
 
+    public AppUserDTO findMatchingUser(AppUserDTO appUserDTO) {
+        String username = appUserDTO.getUsername();
+        String password = appUserDTO.getPassword();
+
+        Optional<AppUser> user = appUserRepository.findMatchingUser(username, password);
+        if( !user.isPresent() ) {
+            throw new ResourceNotFoundException("Username and/or password are incorrect!");
+        } else {
+            return AppUserBuilder.toAppUserDTO(user.get());
+        }
+
+    }
 }

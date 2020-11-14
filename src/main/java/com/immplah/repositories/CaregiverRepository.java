@@ -8,9 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface CaregiverRepository extends JpaRepository<Caregiver, UUID> {
 
-
+    @Query(value = "SELECT c from Caregiver c WHERE c.user.id = :userId")
+    Optional<Caregiver> findByUserId(@Param("userId") UUID userId);
 }

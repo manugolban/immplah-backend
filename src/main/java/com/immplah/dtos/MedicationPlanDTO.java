@@ -1,9 +1,12 @@
 package com.immplah.dtos;
 
-import javax.persistence.Column;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 import java.util.UUID;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MedicationPlanDTO {
 
     private UUID id;
@@ -12,7 +15,9 @@ public class MedicationPlanDTO {
     private String periodTo;
 
     private UUID doctorId;
+    private String doctorFullName;
     private UUID patientId;
+    private String patientFullName;
 
     private DoctorDTO doctor;
     private PatientDTO patient;
@@ -37,6 +42,15 @@ public class MedicationPlanDTO {
         this.periodTo = periodTo;
         this.doctorId = doctorId;
         this.patientId = patientId;
+        this.prescribedDrugs = prescribedDrugs;
+    }
+
+    public MedicationPlanDTO(UUID id, String periodFrom, String periodTo, String doctorFullName, String patientFullName, List<PrescribedDrugDTO> prescribedDrugs) {
+        this.id = id;
+        this.periodFrom = periodFrom;
+        this.periodTo = periodTo;
+        this.doctorFullName = doctorFullName;
+        this.patientFullName = patientFullName;
         this.prescribedDrugs = prescribedDrugs;
     }
 
@@ -102,5 +116,21 @@ public class MedicationPlanDTO {
 
     public void setPatientId(UUID patientId) {
         this.patientId = patientId;
+    }
+
+    public String getDoctorFullName() {
+        return doctorFullName;
+    }
+
+    public void setDoctorFullName(String doctorFullName) {
+        this.doctorFullName = doctorFullName;
+    }
+
+    public String getPatientFullName() {
+        return patientFullName;
+    }
+
+    public void setPatientFullName(String patientFullName) {
+        this.patientFullName = patientFullName;
     }
 }

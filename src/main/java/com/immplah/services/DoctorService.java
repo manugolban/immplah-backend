@@ -61,17 +61,18 @@ public class DoctorService {
             throw new ResourceNotFoundException(Doctor.class.getSimpleName() + " with id: " + id);
         } else {
             return prosumerOptional.get().getMedicationPlans().stream()
-                    .map(MedicationPlanBuilder::toMedicationPlanDTO)
+                    .map(MedicationPlanBuilder::toMedicationPlanWithNamesDTO)
                     .collect(Collectors.toList());
         }
     }
 
     public UUID insert(DoctorDTO doctorDTO){
         AppUser appUser = AppUserBuilder.toEntity(doctorDTO.getUser());
-        Doctor doctor = DoctorBuilder.toEntity(doctorDTO);
-        appUser.setDoctor(doctor);
-        doctor.setUser(appUser);
         appUser = appUserRepository.save(appUser);
+        Doctor doctor = DoctorBuilder.toEntity(doctorDTO);
+       // appUser.setDoctor(doctor);
+        doctor.setUser(appUser);
+
         doctor = doctorRepository.save(doctor);
         LOGGER.debug("Doctor with id {} was inserted in db!", doctor.getId());
         return doctor.getId();
@@ -90,7 +91,7 @@ public class DoctorService {
     }
 
     public UUID deleteById(UUID id) {
-        doctorRepository.deleteDoctorById(id);
+        doctorRepository.deleteById(id);
         LOGGER.debug("Doctor with id{} has been deleted!", id);
         return id;
     }

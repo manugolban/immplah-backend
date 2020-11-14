@@ -12,8 +12,5 @@ import java.util.UUID;
 
 public interface DoctorRepository extends JpaRepository<Doctor, UUID> {
 
-    @Transactional
-    @Modifying
-    @Query(value = "DELETE from Doctor d  WHERE d.id = :id")
-    void deleteDoctorById(@Param("id") UUID id);
+
 }

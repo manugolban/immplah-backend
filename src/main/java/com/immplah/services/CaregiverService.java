@@ -39,7 +39,6 @@ public class CaregiverService {
         return caregiverList.stream()
                 .map(CaregiverBuilder::toCaregiverDTO)
                 .collect(Collectors.toList());
-
     }
 
     public CaregiverDTO findCaregiverById(UUID id) {
@@ -48,6 +47,17 @@ public class CaregiverService {
         if(!prosumerOptional.isPresent()){
             LOGGER.error("Caregiver with id {} was not found in db!", id);
             throw new ResourceNotFoundException(Caregiver.class.getSimpleName() + " with id: " + id);
+        }
+        return CaregiverBuilder.toCaregiverDTO(prosumerOptional.get());
+
+    }
+
+    public CaregiverDTO findCaregiverByUserId(UUID userId) {
+
+        Optional<Caregiver> prosumerOptional = caregiverRepository.findByUserId(userId);
+        if(!prosumerOptional.isPresent()){
+            LOGGER.error("Caregiver with user_id {} was not found in db!", userId);
+            throw new ResourceNotFoundException(Caregiver.class.getSimpleName() + " with id: " + userId);
         }
         return CaregiverBuilder.toCaregiverDTO(prosumerOptional.get());
 

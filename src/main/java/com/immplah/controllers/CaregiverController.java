@@ -31,8 +31,14 @@ public class CaregiverController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<CaregiverDTO> getDoctor(@PathVariable("id") UUID caregiverId){
+    public ResponseEntity<CaregiverDTO> getCaregiver(@PathVariable("id") UUID caregiverId){
         CaregiverDTO dto = caregiverService.findCaregiverById(caregiverId);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/user={id}")
+    public ResponseEntity<CaregiverDTO> getCaregiverByUserId(@PathVariable("id") UUID userId){
+        CaregiverDTO dto = caregiverService.findCaregiverByUserId(userId);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
