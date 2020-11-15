@@ -38,6 +38,13 @@ public class DrugService {
         return drug.getId();
     }
 
+    public UUID update(DrugDTO drugDTO) {
+        Drug drug = DrugBuilder.toEntity(drugDTO);
+        drug = drugRepository.save(drug);
+        LOGGER.debug("Drug with id {} has been updated", drug.getId());
+        return drug.getId();
+    }
+
     public UUID deleteById(UUID drugId) {
         drugRepository.deleteById(drugId);
         LOGGER.debug("Drug with id{} has been deleted!", drugId);

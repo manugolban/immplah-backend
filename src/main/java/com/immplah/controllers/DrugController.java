@@ -36,6 +36,14 @@ public class DrugController {
         return new ResponseEntity<UUID>(drugId, HttpStatus.CREATED);
     }
 
+    @PutMapping()
+    public ResponseEntity<UUID> updateProsumer(@Valid @RequestBody DrugDTO drugDTO) {
+        UUID drugId = drugService.update(drugDTO);
+        return new ResponseEntity<UUID>(drugId, HttpStatus.OK);
+    }
+
+
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<UUID> deleteProsumer(@PathVariable("id") UUID drugId) {
         UUID drug = drugService.deleteById(drugId);
