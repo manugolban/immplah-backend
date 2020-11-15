@@ -51,7 +51,7 @@ public class CaregiverController {
     @PutMapping()
     public ResponseEntity<UUID> updateProsumer(@Valid @RequestBody CaregiverDTO caregiverDTO) {
         UUID caregiverId = caregiverService.update(caregiverDTO);
-        return new ResponseEntity<>(caregiverId, HttpStatus.CREATED);
+        return new ResponseEntity<>(caregiverId, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

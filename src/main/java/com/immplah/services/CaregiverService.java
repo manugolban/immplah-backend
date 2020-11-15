@@ -75,7 +75,9 @@ public class CaregiverService {
 
     public UUID update(CaregiverDTO caregiverDTO) {
         Caregiver caregiver = CaregiverBuilder.toEntity(caregiverDTO);
-        caregiver.setUser(AppUserBuilder.toEntity(caregiverDTO.getUser()));
+        AppUser appUser = AppUserBuilder.toEntity(caregiverDTO.getUser());
+        appUser = appUserRepository.save(appUser);
+        caregiver.setUser(appUser);
         caregiver = caregiverRepository.save(caregiver);
         LOGGER.debug("Caregiver with id {} was been updated!", caregiver.getId());
         return caregiver.getId();
