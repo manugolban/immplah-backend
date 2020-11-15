@@ -87,7 +87,9 @@ public class PatientService {
 
     public UUID update(PatientDTO patientDTO) {
         Patient patient = PatientBuilder.toEntity(patientDTO);
-        patient.setUser(AppUserBuilder.toEntity(patientDTO.getUser()));
+        AppUser appUser = AppUserBuilder.toEntity(patientDTO.getUser());
+        appUser = appUserRepository.save(appUser);
+        patient.setUser(appUser);
         if(patientDTO.getCaregiverId() == null) {
             patient.setCaregiver(null);
         } else {
