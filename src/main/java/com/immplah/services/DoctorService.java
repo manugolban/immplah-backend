@@ -54,6 +54,15 @@ public class DoctorService {
         return DoctorBuilder.toDoctorDTO(prosumerOptional.get());
     }
 
+    public UUID findDoctorIdByUserId(UUID id) {
+        Optional<UUID> prosumerOptional = doctorRepository.findByUserId(id);
+        if(!prosumerOptional.isPresent()){
+            LOGGER.error("Doctor with user_id  {} was not found in db!", id);
+            throw new ResourceNotFoundException(Doctor.class.getSimpleName() + " with id: " + id);
+        }
+        return prosumerOptional.get();
+    }
+
     public List<MedicationPlanDTO> findMedicationPlansByDoctorId(UUID id) {
         Optional<Doctor> prosumerOptional = doctorRepository.findById(id);
         if(!prosumerOptional.isPresent()){

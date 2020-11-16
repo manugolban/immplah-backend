@@ -5,6 +5,7 @@ import com.immplah.dtos.MedicationPlanDTO;
 import com.immplah.entities.Doctor;
 import com.immplah.services.AppUserService;
 import com.immplah.services.DoctorService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +45,13 @@ public class DoctorController {
     public ResponseEntity<List<MedicationPlanDTO>> getPlansByPatientId(@PathVariable("id") UUID doctorId){
         List<MedicationPlanDTO> dtos = doctorService.findMedicationPlansByDoctorId(doctorId);
         return new ResponseEntity<>(dtos, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/user={id}")
+    public ResponseEntity<UUID> getDoctorIdByUserId(@PathVariable("id") UUID userId) {
+
+        UUID doctorId = doctorService.findDoctorIdByUserId(userId);
+        return new ResponseEntity<>(doctorId, HttpStatus.OK);
     }
 
     @PostMapping()

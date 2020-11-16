@@ -34,7 +34,7 @@ public class MedicationPlan implements Serializable {
     @JoinColumn(name="patient_id")
     private Patient patient;
 
-    @OneToMany(mappedBy = "medicationPlan", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "medicationPlan", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<PrescribedDrug> prescribedDrugs;
 
     public MedicationPlan() {
