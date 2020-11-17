@@ -5,12 +5,9 @@ import com.immplah.dtos.MedicationPlanDTO;
 import com.immplah.dtos.PatientDTO;
 import com.immplah.dtos.builders.*;
 import com.immplah.entities.AppUser;
-import com.immplah.entities.MedicationPlan;
 import com.immplah.entities.Patient;
-import com.immplah.entities.Person;
 import com.immplah.repositories.AppUserRepository;
 import com.immplah.repositories.CaregiverRepository;
-import com.immplah.repositories.PatientRepository;
 import com.immplah.repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -27,7 +23,7 @@ import java.util.stream.Collectors;
 @Service
 public class PatientService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PersonService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PatientService.class);
     private final PatientRepository patientRepository;
     private final CaregiverRepository caregiverRepository;
     private final AppUserRepository appUserRepository;

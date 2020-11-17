@@ -3,9 +3,7 @@ package com.immplah.services;
 import com.immplah.controllers.handlers.exceptions.model.ResourceNotFoundException;
 import com.immplah.dtos.MedicationPlanDTO;
 import com.immplah.dtos.builders.*;
-import com.immplah.entities.AppUser;
 import com.immplah.entities.MedicationPlan;
-import com.immplah.entities.Person;
 import com.immplah.entities.PrescribedDrug;
 import com.immplah.repositories.*;
 import com.immplah.repositories.MedicationPlanRepository;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,7 +21,7 @@ import java.util.stream.Collectors;
 @Service
 public class MedicationPlanService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PersonService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CaregiverService.class);
     private final MedicationPlanRepository  medicationPlanRepository;
     private final DoctorRepository  doctorRepository;
     private final PatientRepository patientRepository;

@@ -2,16 +2,9 @@ package com.immplah.services;
 
 import com.immplah.controllers.handlers.exceptions.model.ResourceNotFoundException;
 import com.immplah.dtos.PrescribedDrugDTO;
-import com.immplah.dtos.builders.AppUserBuilder;
-import com.immplah.dtos.builders.DrugBuilder;
 import com.immplah.dtos.builders.PrescribedDrugBuilder;
-import com.immplah.dtos.builders.PersonBuilder;
-import com.immplah.entities.AppUser;
 import com.immplah.entities.PrescribedDrug;
-import com.immplah.entities.Person;
-import com.immplah.repositories.AppUserRepository;
 import com.immplah.repositories.DrugRepository;
-import com.immplah.repositories.PrescribedDrugRepository;
 import com.immplah.repositories.PrescribedDrugRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +20,7 @@ import java.util.stream.Collectors;
 @Service
 public class PrescribedDrugService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PersonService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PrescribedDrugService.class);
     private final PrescribedDrugRepository  prescribedDrugRepository;
     private final DrugRepository  drugRepository;
 

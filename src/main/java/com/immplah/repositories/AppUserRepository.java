@@ -1,7 +1,6 @@
 package com.immplah.repositories;
 
 import com.immplah.entities.AppUser;
-import com.immplah.entities.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
