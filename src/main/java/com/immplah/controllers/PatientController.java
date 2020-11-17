@@ -42,6 +42,13 @@ public class PatientController {
         List<MedicationPlanDTO> dtos = patientService.findMedicationPlansByPatientId(patientId);
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/plans/user={id}")
+    public ResponseEntity<List<MedicationPlanDTO>> getPlansByUserId(@PathVariable("id") UUID userId){
+        List<MedicationPlanDTO> dtos = patientService.findMedicationPlansByUserId(userId);
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
+    }
+
     @PostMapping()
     public ResponseEntity<UUID> insertProsumer(@Valid @RequestBody PatientDTO patientDTO) {
         UUID patientId = patientService.insert(patientDTO);

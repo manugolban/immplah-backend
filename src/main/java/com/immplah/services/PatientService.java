@@ -67,6 +67,18 @@ public class PatientService {
         }
     }
 
+    public List<MedicationPlanDTO> findMedicationPlansByUserId(UUID id) {
+        Optional<Patient> prosumerOptional = patientRepository.findByUserId(id);
+        if(!prosumerOptional.isPresent()){
+            LOGGER.error("Patient with USER_ID {} was not found in db", id);
+            throw new ResourceNotFoundException(Patient.class.getSimpleName() + " with id: " + id);
+        } else {
+            return prosumerOptional.get().getMedicationPlans().stream()
+                    .map(MedicationPlanBuilder::toMedicationPlanWithNamesDTO)
+                    .collect(Collectors.toList());
+        }
+    }
+
 
     public UUID insert(PatientDTO patientDTO) {
         Patient patient = PatientBuilder.toEntity(patientDTO);
