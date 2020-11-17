@@ -146,7 +146,7 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>10%</minimum>
+                                            <minimum>7%</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
@@ -162,7 +162,7 @@
                 <version>3.0.0</version>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
-                    <!--<failsOnError>true</failsOnError> -->
+<!--                    <failsOnError>true</failsOnError>-->
                     <consoleOutput>true</consoleOutput>
                     <violationSeverity>error</violationSeverity>
                     <failOnViolation>true</failOnViolation>
