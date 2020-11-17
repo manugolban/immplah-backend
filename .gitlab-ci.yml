@@ -14,7 +14,7 @@ test:
     stage: test
     image: maven:3.3.9-jdk-8
     script:
-    - echo "Test DEMO app"
+    - echo "Test IMMPlaH app"
     - mvn test && mvn jacoco:report
     - cat target/site/jacoco/index.html | grep -o '.*'
     coverage: "/Total.*?([0-9]{1,3})%/"
@@ -24,15 +24,15 @@ checkstyle:
     stage: checkstyle
     image: maven:3.3.9-jdk-8
     script:
-    - echo "Checkstyle DEMO app"
+    - echo "Checkstyle IMMPlaH app"
     - mvn checkstyle:check
 
 variables:
-    DB_IP: ec2-52-48-65-240.eu-west-1.compute.amazonaws.com
+    DB_IP: ec2-3-248-4-172.eu-west-1.compute.amazonaws.com
     DB_PORT: 5432
-    DB_USER: wlryktxyqpyomt
-    DB_PASSWORD: bee98a2afc7f0c3bcdd7df60ee7278ec5fa5cb4fb06a4039b1ffb1107d5851fd
-    DB_DBNAME: devidei2vqv0v4
+    DB_USER: bhljaaqzidtckg
+    DB_PASSWORD: f09a3503a22476fa01059759aba6d703f7cd420f99a06ab53824dbc2e9b2c7cf
+    DB_DBNAME: d9jsuidl8g761v
     
 deploy:
   stage: deploy
@@ -41,6 +41,6 @@ deploy:
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --app=spring-demo-ds2020 --api-key=$HEROKU_API_KEY
+    - dpl --provider=heroku --app=immplah-api --api-key=$HEROKU_API_KEY
   only:
     - production
