@@ -37,6 +37,12 @@ public class PatientController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/user={id}")
+    public ResponseEntity<PatientDTO> getPatientByUserId(@PathVariable("id") UUID userId){
+        PatientDTO dto = patientService.findPatientByUserId(userId);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/plans/{id}")
     public ResponseEntity<List<MedicationPlanDTO>> getPlansByPatientId(@PathVariable("id") UUID patientId){
         List<MedicationPlanDTO> dtos = patientService.findMedicationPlansByPatientId(patientId);
