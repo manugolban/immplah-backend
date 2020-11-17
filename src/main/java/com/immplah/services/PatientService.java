@@ -55,10 +55,33 @@ public class PatientService {
 
     }
 
+    public PatientDTO findPatientByUserId(UUID userId) {
+
+        Optional<Patient> prosumerOptional = patientRepository.findByUserId(userId);
+        if(!prosumerOptional.isPresent()){
+            LOGGER.error("Patient with USER_ID {} was not found in db", userId);
+            throw new ResourceNotFoundException(Patient.class.getSimpleName() + " with id: " + userId);
+        }
+        return PatientBuilder.toPatientDTO(prosumerOptional.get());
+
+    }
+
     public List<MedicationPlanDTO> findMedicationPlansByPatientId(UUID id) {
         Optional<Patient> prosumerOptional = patientRepository.findById(id);
         if(!prosumerOptional.isPresent()){
             LOGGER.error("Patient with id {} was not found in db", id);
+            throw new ResourceNotFoundException(Patient.class.getSimpleName() + " with id: " + id);
+        } else {
+            return prosumerOptional.get().getMedicationPlans().stream()
+                    .map(MedicationPlanBuilder::toMedicationPlanWithNamesDTO)
+                    .collect(Collectors.toList());
+        }
+    }
+
+    public List<MedicationPlanDTO> findMedicationPlansByUserId(UUID id) {
+        Optional<Patient> prosumerOptional = patientRepository.findByUserId(id);
+        if(!prosumerOptional.isPresent()){
+            LOGGER.error("Patient with USER_ID {} was not found in db", id);
             throw new ResourceNotFoundException(Patient.class.getSimpleName() + " with id: " + id);
         } else {
             return prosumerOptional.get().getMedicationPlans().stream()
