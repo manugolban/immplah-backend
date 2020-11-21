@@ -34,22 +34,20 @@ public class RabbitMQConsumer {
                 entry.getLong("start"),
                 entry.getLong("end"));
 
-        Duration duration = Duration.ofMillis(entry.getLong("end") - entry.getLong("start"));
-        long hours = duration.toHoursPart();
-        long minutes = duration.toMinutesPart();
 
+        long periodHours = TimeUnit.MILLISECONDS.toHours(entry.getLong("end") - entry.getLong("start"));
         long periodMinutes = TimeUnit.MILLISECONDS.toMinutes(entry.getLong("end") - entry.getLong("start"));
 
         switch(entry.getString("activity")) {
             case "Sleeping":
-                if (hours > 8) {
+                if (periodHours > 8) {
                     sensorData.setAnomalous(true);
                 } else {
                     sensorData.setAnomalous(false);
                 }
                 break;
             case "Leaving":
-                if (hours > 5) {
+                if (periodHours > 5) {
                     sensorData.setAnomalous(true);
                 } else {
                     sensorData.setAnomalous(false);
@@ -72,10 +70,9 @@ public class RabbitMQConsumer {
                 sensorData.setAnomalous(false);
         }
 
-
         System.out.println( String.format("[%s] Received sensor data tuplet >> ACTIVITY: [%s] WITH DURATION: [HOURS: %s | MINUTES: %s] >> [MARKED AS: %s ]",
                 LocalDateTime.now(),
-                entry.getString("activity"), hours, minutes,
+                entry.getString("activity"), periodHours, periodMinutes,
                 sensorData.isAnomalous() ? "ANOMALOUS" : " *NOT* ANOMALOUS"));
 
         sensorData = sensorDataRepository.save(sensorData);
