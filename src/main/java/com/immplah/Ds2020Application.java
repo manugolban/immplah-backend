@@ -18,7 +18,6 @@ public class Ds2020Application extends SpringBootServletInitializer {
 
     static final String queueName = "immplah-queue";
     static final String exchange = "sensor-data-exchange";
-
     static final String routingKey = "immplah";
 
     @Bean
