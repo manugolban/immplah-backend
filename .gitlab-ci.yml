@@ -1,14 +1,9 @@
 stages:
-  - build
   - test
   - checkstyle
+  - build
   - deploy
 
-build:
-  stage: build
-  image: maven:3.3.9-jdk-8
-  script:
-    - mvn clean package
 
 test:
     stage: test
@@ -24,23 +19,36 @@ checkstyle:
     stage: checkstyle
     image: maven:3.3.9-jdk-8
     script:
-    - echo "Checkstyle IMMPlaH app"
+    - echo "Checkstyle DEMO app"
     - mvn checkstyle:check
 
+build:
+  image: docker:latest
+  services:
+    - docker:dind
+  stage: build
+  script:
+    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:latest
+
 variables:
-    DB_IP: ec2-3-248-4-172.eu-west-1.compute.amazonaws.com
-    DB_PORT: 5432
-    DB_USER: bhljaaqzidtckg
-    DB_PASSWORD: f09a3503a22476fa01059759aba6d703f7cd420f99a06ab53824dbc2e9b2c7cf
-    DB_DBNAME: d9jsuidl8g761v
+    APP_NAME: immplah-api
     
 deploy:
+  image: docker:latest
+  services:
+    - docker:dind
   stage: deploy
-  image: ruby:2.4
-  script:
-    - apt-get update -qy
-    - apt-get install -y ruby-dev
-    - gem install dpl
-    - dpl --provider=heroku --app=immplah-api --api-key=$HEROKU_API_KEY
   only:
-    - production
+    - docker_production
+  script:
+    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
+    - docker pull $CI_REGISTRY_IMAGE:latest
+    - docker tag $CI_REGISTRY_IMAGE:latest $HEROKU_REGISTRY_IMAGE:latest
+    - docker login --username=_ --password=$HEROKU_API_KEY $HEROKU_REGISTRY
+    - docker push $HEROKU_REGISTRY_IMAGE:latest
+    - docker run --rm -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli container:release web --app $APP_NAME
+
