@@ -1,5 +1,6 @@
 package com.immplah.controllers;
 
+import com.immplah.dtos.DayPlanDTO;
 import com.immplah.dtos.MedicationPlanDTO;
 import com.immplah.services.MedicationPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
