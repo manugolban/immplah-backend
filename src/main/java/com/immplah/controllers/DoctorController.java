@@ -54,7 +54,7 @@ public class DoctorController {
         return new ResponseEntity<>(doctorId, HttpStatus.OK);
     }
 
-    @PostMapping()
+    @PostMapping("/add")
     public ResponseEntity<UUID> insertProsumer(@Valid @RequestBody DoctorDTO doctorDTO) {
         UUID doctorId = doctorService.insert(doctorDTO);
         return new ResponseEntity<>(doctorId, HttpStatus.CREATED);

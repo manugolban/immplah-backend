@@ -11,6 +11,17 @@ import java.util.UUID;
 
 @JsonRpcService("/pillbox")
 public interface MedPlanService {
-    DayPlanDTO getTodaysPlan(@JsonRpcParam(value="date") String todaysDate,
-                             @JsonRpcParam(value="patientId")UUID patientId);
+
+    DayPlanDTO getTodaysPlan(@JsonRpcParam(value = "date") String todaysDate,
+                             @JsonRpcParam(value = "patientId") UUID patientId);
+
+    String markDrugAsTaken(@JsonRpcParam(value = "drug") String drug,
+                           @JsonRpcParam(value = "patientId") UUID patientId,
+                           @JsonRpcParam(value = "takenOn") String date,
+                           @JsonRpcParam(value = "interval") String interval);
+
+    String markDrugAsNotTaken(@JsonRpcParam(value = "drug") String drug,
+                           @JsonRpcParam(value = "patientId") UUID patientId,
+                           @JsonRpcParam(value = "takenOn") String date,
+                           @JsonRpcParam(value = "interval") String interval);
 }

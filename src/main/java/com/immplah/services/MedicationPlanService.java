@@ -60,9 +60,9 @@ public class MedicationPlanService {
 
     public DayPlanDTO getDayPlan(String todaysDate, UUID patientId) {
 
-        Optional<Patient> prosumerOptional = patientRepository.findById(patientId);
+        Optional<Patient> prosumerOptional = patientRepository.findByUserId(patientId);
         if(!prosumerOptional.isPresent()){
-            LOGGER.error("Patient with id {} was not found in db", patientId);
+            LOGGER.error("Patient with User ID {} was not found in db", patientId);
             throw new ResourceNotFoundException(Patient.class.getSimpleName() + " with id: " + patientId);
         }
 
@@ -85,7 +85,7 @@ public class MedicationPlanService {
             if (current.after(from) && current.before(to)) {
                 for(PrescribedDrug p: m.getPrescribedDrugs()) {
                     if (p.getDays().contains(dayOfWeek)) {
-                        dayPlan.getMedication().add(new DayPlanDrugDTO(p.getDrug().getName(), p.getDosage(),p.isMorning(), p.isBedTime(), p.isEvening(), p.isBedTime()));
+                        dayPlan.getMedication().add(new DayPlanDrugDTO(p.getDrug().getName(), p.getDosage(),p.isMorning(), p.isBedTime(), p.isEvening(), p.isBedTime(), false));
                     }
                 }
             }
@@ -95,9 +95,10 @@ public class MedicationPlanService {
     }
 
     public UUID insert(MedicationPlanDTO medicationPlanDTO) {
+
         MedicationPlan medicationPlan = MedicationPlanBuilder.toEntity(medicationPlanDTO);
 
-        medicationPlan.setDoctor(doctorRepository.findById(medicationPlanDTO.getDoctorId()).get());
+        medicationPlan.setDoctor(doctorRepository.findDoctorByUserId(medicationPlanDTO.getDoctorId()).get());
         medicationPlan.setPatient(patientRepository.findById(medicationPlanDTO.getPatientId()).get());
 
         medicationPlan = medicationPlanRepository.save(medicationPlan);

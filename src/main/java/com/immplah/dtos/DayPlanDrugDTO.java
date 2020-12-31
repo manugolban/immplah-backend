@@ -14,19 +14,24 @@ public class DayPlanDrugDTO implements Serializable {
     private boolean evening;
     private boolean bedTime;
 
+    private boolean taken;
+
     public DayPlanDrugDTO(String drugName, String dosage) {
         this.drugName = drugName;
         this.dosage = dosage;
     }
 
-    public DayPlanDrugDTO(String drugName, String dosage, boolean morning, boolean midDay, boolean evening, boolean bedTime) {
+    public DayPlanDrugDTO(String drugName, String dosage, boolean morning, boolean midDay, boolean evening, boolean bedTime, boolean taken) {
         this.drugName = drugName;
         this.dosage = dosage;
         this.morning = morning;
         this.midDay = midDay;
         this.evening = evening;
         this.bedTime = bedTime;
+        this.taken = taken;
     }
+
+
 
     public boolean isMorning() {
         return morning;
@@ -74,5 +79,13 @@ public class DayPlanDrugDTO implements Serializable {
 
     public void setDosage(String dosage) {
         this.dosage = dosage;
+    }
+
+    public boolean isTaken() {
+        return taken;
+    }
+
+    public void setTaken(boolean taken) {
+        this.taken = taken;
     }
 }

@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @Configuration
 public class PillboxServer {
 
-    @Autowired
-    private MedicationPlanService medicationPlanService;
-
     @Bean(name = "/pillbox")
     public static AutoJsonRpcServiceImplExporter autoJsonRpcServiceImplExporter() {
         AutoJsonRpcServiceImplExporter exporter = new AutoJsonRpcServiceImplExporter();

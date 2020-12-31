@@ -3,15 +3,21 @@ package com.immplah.services;
 
 import com.immplah.controllers.handlers.exceptions.model.ResourceNotFoundException;
 import com.immplah.dtos.AppUserDTO;
+import com.immplah.dtos.LoginResponseDTO;
 import com.immplah.dtos.builders.AppUserBuilder;
 import com.immplah.entities.AppUser;
 import com.immplah.repositories.AppUserRepository;
+import com.immplah.security.services.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -19,7 +25,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class AppUserService {
+public class AppUserService implements UserDetailsService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AppUserService.class);
     private final AppUserRepository appUserRepository;
@@ -61,7 +67,7 @@ public class AppUserService {
         return id;
     }
 
-    public AppUserDTO findMatchingUser(AppUserDTO appUserDTO) {
+    public LoginResponseDTO findMatchingUser(AppUserDTO appUserDTO) {
         String username = appUserDTO.getUsername();
         String password = appUserDTO.getPassword();
 
@@ -69,8 +75,21 @@ public class AppUserService {
         if( !user.isPresent() ) {
             throw new ResourceNotFoundException("Username and/or password are incorrect!");
         } else {
-            return AppUserBuilder.toAppUserDTO(user.get());
+            return new LoginResponseDTO(user.get().getId().toString(), user.get().getUsername(), null, user.get().getUserType().toString());
         }
+
+    }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<AppUser> user = appUserRepository.findByUsername(username);
+
+        if( !user.isPresent() ) {
+            throw new UsernameNotFoundException(String.format("User with username: [%s] was not found", username));
+        }
+
+        return UserDetailsImpl.build(user.get());
 
     }
 }
