@@ -85,7 +85,7 @@ public class MedicationPlanService {
             if (current.after(from) && current.before(to)) {
                 for(PrescribedDrug p: m.getPrescribedDrugs()) {
                     if (p.getDays().contains(dayOfWeek)) {
-                        dayPlan.getMedication().add(new DayPlanDrugDTO(p.getDrug().getName(), p.getDosage(),p.isMorning(), p.isBedTime(), p.isEvening(), p.isBedTime(), false));
+                        dayPlan.getMedication().add(new DayPlanDrugDTO(p.getDrug().getName(), p.getDosage(),p.isMorning(), p.isBedTime(), p.isEvening(), p.isBedTime(), false, false, false, false));
                     }
                 }
             }

@@ -14,24 +14,28 @@ public class DayPlanDrugDTO implements Serializable {
     private boolean evening;
     private boolean bedTime;
 
-    private boolean taken;
+    private boolean takenMorning;
+    private boolean takenMidDay;
+    private boolean takenEvening;
+    private boolean takenBedTime;
 
     public DayPlanDrugDTO(String drugName, String dosage) {
         this.drugName = drugName;
         this.dosage = dosage;
     }
 
-    public DayPlanDrugDTO(String drugName, String dosage, boolean morning, boolean midDay, boolean evening, boolean bedTime, boolean taken) {
+    public DayPlanDrugDTO(String drugName, String dosage, boolean morning, boolean midDay, boolean evening, boolean bedTime, boolean takenMorning, boolean takenMidDay, boolean takenEvening, boolean takenBedTime) {
         this.drugName = drugName;
         this.dosage = dosage;
         this.morning = morning;
         this.midDay = midDay;
         this.evening = evening;
         this.bedTime = bedTime;
-        this.taken = taken;
+        this.takenMorning = takenMorning;
+        this.takenMidDay = takenMidDay;
+        this.takenEvening = takenEvening;
+        this.takenBedTime = takenBedTime;
     }
-
-
 
     public boolean isMorning() {
         return morning;
@@ -81,11 +85,35 @@ public class DayPlanDrugDTO implements Serializable {
         this.dosage = dosage;
     }
 
-    public boolean isTaken() {
-        return taken;
+    public boolean isTakenMorning() {
+        return takenMorning;
     }
 
-    public void setTaken(boolean taken) {
-        this.taken = taken;
+    public void setTakenMorning(boolean takenMorning) {
+        this.takenMorning = takenMorning;
+    }
+
+    public boolean isTakenMidDay() {
+        return takenMidDay;
+    }
+
+    public void setTakenMidDay(boolean takenMidDay) {
+        this.takenMidDay = takenMidDay;
+    }
+
+    public boolean isTakenEvening() {
+        return takenEvening;
+    }
+
+    public void setTakenEvening(boolean takenEvening) {
+        this.takenEvening = takenEvening;
+    }
+
+    public boolean isTakenBedTime() {
+        return takenBedTime;
+    }
+
+    public void setTakenBedTime(boolean takenBedTime) {
+        this.takenBedTime = takenBedTime;
     }
 }
