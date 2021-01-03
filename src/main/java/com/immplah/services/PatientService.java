@@ -10,6 +10,7 @@ import com.immplah.repositories.AppUserRepository;
 import com.immplah.repositories.CaregiverRepository;
 import com.immplah.repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import org.slf4j.Logger;
@@ -27,6 +28,9 @@ public class PatientService {
     private final PatientRepository patientRepository;
     private final CaregiverRepository caregiverRepository;
     private final AppUserRepository appUserRepository;
+
+    @Autowired
+    PasswordEncoder encoder;
 
     @Autowired
     public PatientService(PatientRepository patientRepository, CaregiverRepository caregiverRepository, AppUserRepository appUserRepository) {
@@ -94,6 +98,7 @@ public class PatientService {
     public UUID insert(PatientDTO patientDTO) {
         Patient patient = PatientBuilder.toEntity(patientDTO);
         AppUser appUser = AppUserBuilder.toEntity(patientDTO.getUser());
+        appUser.setPassword(encoder.encode(appUser.getPassword()));
         appUser = appUserRepository.save(appUser);
         patient.setUser(appUser);
         if(patientDTO.getCaregiverId() != null) {

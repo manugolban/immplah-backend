@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @TestPropertySource(locations = "classpath:application-test.properties")
 @AutoConfigureMockMvc
 public class Ds2020TestConfig {
+
     @Test
     public void contextLoads() {
         assert true ;

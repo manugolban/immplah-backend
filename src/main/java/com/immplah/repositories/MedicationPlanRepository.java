@@ -8,6 +8,4 @@ import java.util.UUID;
 
 public interface MedicationPlanRepository extends JpaRepository<MedicationPlan, UUID> {
 
-
-
 }
