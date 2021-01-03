@@ -10,6 +10,7 @@ import com.immplah.repositories.AppUserRepository;
 import com.immplah.repositories.CaregiverRepository;
 import com.immplah.repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,9 @@ public class CaregiverService {
     private final CaregiverRepository caregiverRepository;
     private final PatientRepository patientRepository;
     private final AppUserRepository appUserRepository;
+
+    @Autowired
+    PasswordEncoder encoder;
 
     @Autowired
     public CaregiverService(CaregiverRepository caregiverRepository, PatientRepository patientRepository, AppUserRepository appUserRepository) {
@@ -66,6 +70,7 @@ public class CaregiverService {
     public UUID insert(CaregiverDTO caregiverDTO) {
         Caregiver caregiver = CaregiverBuilder.toEntity(caregiverDTO);
         AppUser appUser = AppUserBuilder.toEntity(caregiverDTO.getUser());
+        appUser.setPassword(encoder.encode(appUser.getPassword()));
         appUser = appUserRepository.save(appUser);
         caregiver.setUser(appUser);
         caregiver = caregiverRepository.save(caregiver);
@@ -86,7 +91,7 @@ public class CaregiverService {
     public UUID delete(UUID caregiverId) {
         patientRepository.deletePatientCaregiver(caregiverId);
         caregiverRepository.deleteById(caregiverId);
-        LOGGER.debug("Caregiver with id{} has been deleted!", caregiverId);
+        LOGGER.debug("Caregiver with id {} has been deleted!", caregiverId);
         return caregiverId;
     }
 }

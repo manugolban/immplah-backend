@@ -11,6 +11,7 @@ import com.immplah.entities.Doctor;
 import com.immplah.repositories.AppUserRepository;
 import com.immplah.repositories.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import org.slf4j.Logger;
@@ -27,6 +28,9 @@ public class DoctorService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DoctorService.class);
     private final DoctorRepository doctorRepository;
     private final AppUserRepository appUserRepository;
+
+    @Autowired
+    PasswordEncoder encoder;
 
     @Autowired
     public DoctorService(DoctorRepository doctorRepository, AppUserRepository appUserRepository) {
@@ -74,6 +78,7 @@ public class DoctorService {
 
     public UUID insert(DoctorDTO doctorDTO){
         AppUser appUser = AppUserBuilder.toEntity(doctorDTO.getUser());
+        appUser.setPassword(encoder.encode(appUser.getPassword()));
         appUser = appUserRepository.save(appUser);
         Doctor doctor = DoctorBuilder.toEntity(doctorDTO);
        // appUser.setDoctor(doctor);

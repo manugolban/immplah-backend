@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface AppUserRepository extends JpaRepository<AppUser, UUID> {
 
     @Query(value = "SELECT u from AppUser u WHERE u.username = :username")
-    Optional<AppUser> findAppUserByUsername(@Param("username") String username);
+    Optional<AppUser> findByUsername(@Param("username") String username);
 
     @Transactional
     @Modifying
@@ -22,4 +22,5 @@ public interface AppUserRepository extends JpaRepository<AppUser, UUID> {
 
     @Query(value = "SELECT u from AppUser u WHERE u.username = :username AND u.password = :password")
     Optional<AppUser> findMatchingUser(@Param("username") String username, @Param("password") String password);
+
 }

@@ -2,6 +2,7 @@ package com.immplah.controllers;
 
 import com.immplah.dtos.AppUserDTO;
 import com.immplah.dtos.DrugDTO;
+import com.immplah.dtos.LoginResponseDTO;
 import com.immplah.entities.AppUser;
 import com.immplah.services.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,8 @@ public class IndexController {
     }
 
     @PostMapping(value = "/login")
-    public ResponseEntity<AppUserDTO> login(@Valid @RequestBody AppUserDTO appUserDTO) {
-        AppUserDTO foundUser = appUserService.findMatchingUser(appUserDTO);
+    public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody AppUserDTO appUserDTO) {
+        LoginResponseDTO foundUser = appUserService.findMatchingUser(appUserDTO);
         return new ResponseEntity<>(foundUser, HttpStatus.OK);
     }
 }
